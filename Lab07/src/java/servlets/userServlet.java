@@ -19,7 +19,7 @@ public class userServlet extends HttpServlet {
         
         UserService ns = new UserService();
 
-        try {
+        try {           
             List<User> users = ns.getAll();
             request.setAttribute("users", users);
             System.out.println(users);
