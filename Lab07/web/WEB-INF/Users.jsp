@@ -80,56 +80,27 @@
                 <div class="col-6 text-center">
                     <h3>Manage Users</h3>
 
-<!--                    <table class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${users}" var="user">
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>${user.email}</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> 
-                            </c:forEach>
-                        </tbody>
-                    </table>-->
-
                     <table class="table table-dark">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First</th>
                                 <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Role</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            <c:forEach items="${users}" var="user">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>${user.first_name}</td>
+                                    <td>${user.last_name}</td>
+                                    <td>${user.role}</td>
+                                </tr> 
+                            </c:forEach>
                         </tbody>
                     </table>
+
                 </div>
                 <div class="col-3 text-center">
                     <h3>Edit User</h3>
