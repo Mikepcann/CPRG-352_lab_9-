@@ -16,6 +16,7 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         System.out.println("In the UserDB below");
+        
         String sql = "SELECT * FROM user";
         
         try {
