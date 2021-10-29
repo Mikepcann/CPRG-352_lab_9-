@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -18,24 +13,22 @@ import models.Role;
  */
 public class RoleDB {
     
-    public List<Role> getAll() throws Exception {
-        System.out.println("Roles in the DB");
+    public List<Role> getAll() throws Exception{
         List<Role> roles = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-       
         
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM role WHERE role_id=?";
         
-        try {
+                try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int roleID = rs.getInt(1);
+                int roleId = rs.getInt(1);
                 String roleName = rs.getString(2);
-                Role role = new Role(roleID, roleName);
+                Role role = new Role(roleId, roleName);
                 roles.add(role);
             }
         } finally {
@@ -43,6 +36,7 @@ public class RoleDB {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
         }
+
         return roles;
     }
     
