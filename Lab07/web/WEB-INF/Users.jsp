@@ -24,12 +24,10 @@ contentType="text/html" pageEncoding="UTF-8"%>
       <div class="row">
         <div class="col-3 text-center">
           <h3>Add User</h3>
-          <form action="Users" method="post">
+          <form>
             <div class="input-group mb-3">
               <input
                 type="text"
-                name="email"
-                value=""
                 class="form-control"
                 placeholder="Email"
                 aria-label="Recipient's username"
@@ -39,8 +37,6 @@ contentType="text/html" pageEncoding="UTF-8"%>
             <div class="input-group mb-3">
               <input
                 type="text"
-                name="firstName"
-                value=""
                 class="form-control"
                 placeholder="First Name"
                 aria-label="Recipient's username"
@@ -50,8 +46,6 @@ contentType="text/html" pageEncoding="UTF-8"%>
             <div class="input-group mb-3">
               <input
                 type="text"
-                name="lastName"
-                value=""
                 class="form-control"
                 placeholder="Last Name"
                 aria-label="Recipient's username"
@@ -61,8 +55,6 @@ contentType="text/html" pageEncoding="UTF-8"%>
             <div class="input-group mb-3">
               <input
                 type="text"
-                name="password"
-                value=""
                 class="form-control"
                 placeholder="Password"
                 aria-label="Recipient's username"
@@ -70,23 +62,24 @@ contentType="text/html" pageEncoding="UTF-8"%>
               />
             </div>
             <div class="input-group mb-3">
-
-              <select class="form-select" id="inputGroupSelect01" name="roleSelect">
-                <option selected>Choose Role</option>
-                <option value="1">System Admin</option>
-                <option value="2">Regular User</option>
-                <option value="3">Company Admin</option>
+              <label class="input-group-text" for="inputGroupSelect01"
+                >System Admin</label
+              >
+              <select class="form-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
               </select>
             </div>
             <div class="d-grid gap-2">
-                <input type="hidden" name="action" value="add">
-              <button class="btn btn-primary" type="submit">Save</button>
+              <button class="btn btn-primary" type="button">Save</button>
             </div>
           </form>
         </div>
         <div class="col-6 text-center">
           <h3>Manage Users</h3>
-          <form action="Users" method="post">
+          <form action="users" method="post">
             <table class="table table-dark">
               <thead>
                 <tr>
@@ -117,14 +110,9 @@ contentType="text/html" pageEncoding="UTF-8"%>
                         </c:otherwise>    
                     </c:choose>
                     <td>
-                        </form>
-                    <%-- This is a form for the edit button--%>
-                    <form action="Users" method="post">
-                        <input type="hidden" name="action" value="update">
-                        <input type="hidden" name="toUpdate" value="${user.email}">
                       <button
                         type="submit"
-                        class="btn btn-link editButton"
+                        class="btn btn-link"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -139,16 +127,11 @@ contentType="text/html" pageEncoding="UTF-8"%>
                           />
                         </svg>
                       </button>
-                    </form>
                     </td>
                     <td>
-                    <%-- This is a form for the delete button--%>    
-                    <form action="Users" method="post">
-                            <input type="hidden" name="action" value="delete"> 
-                            <input type="hidden" name="toDelete" value="${user.email}">
                       <button
                         type="submit"
-                        class="btn btn-link deleteButton"
+                        class="btn btn-link"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -163,14 +146,13 @@ contentType="text/html" pageEncoding="UTF-8"%>
                           />
                         </svg>
                       </button>
-                    </form>
                     </td>
                   </tr>
                 </c:forEach>
               </tbody>
             </table>
           </div>
-                
+          </form>
         <div class="col-3 text-center">
           <h3>Edit User</h3>
           <form class="border border-info p-2">
@@ -178,20 +160,9 @@ contentType="text/html" pageEncoding="UTF-8"%>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Email"
-                aria-label="Recipient's email"
-                aria-describedby="basic-addon2"
-                value="${updatedEmail}"
-              />
-            </div>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
                 placeholder="First Name"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
-                value="${updatedFirstName}"
               />
             </div>
             <div class="input-group mb-3">
@@ -201,7 +172,6 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="Last Name"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
-                value="${updatedLastName}"
               />
             </div>
             <div class="input-group mb-3">
@@ -211,20 +181,22 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="Password"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
-                value="${updatedPassword}"
               />
             </div>
             <div class="input-group mb-3">
-              <select class="form-select" id="inputGroupSelect01" value="${updatedRole}">
-                <option>Choose Updated Role</option>
-                <option value="1">System Admin</option>
-                <option value="2">Regular User</option>
-                <option value="3">Company Admin</option>
+              <label class="input-group-text" for="inputGroupSelect01"
+                >System Admin</label
+              >
+              <select class="form-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
               </select>
             </div>
             <div class="d-grid gap-2">
               <button class="btn btn-primary" type="button">Save</button>
-              <button class="btn btn-primary" action="Users" method="get">Cancel</button>
+              <button class="btn btn-primary" type="button">Cancel</button>
             </div>
           </form>
         </div>
