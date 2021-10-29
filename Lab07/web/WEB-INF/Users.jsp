@@ -87,17 +87,28 @@ contentType="text/html" pageEncoding="UTF-8"%>
                   <th scope="col">First</th>
                   <th scope="col">Last</th>
                   <th scope="col">Role</th>
+                  <th scope="col">Active</th>
                   <th scope="col">Edit</th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
+                  <%--Loop through users to display on the page --%>
                 <c:forEach items="${users}" var="user">
                   <tr>
                     <td>${user.email}</td>
                     <td>${user.first_name}</td>
                     <td>${user.last_name}</td>
                     <td>${user.role}</td>
+                     <%--Display check mark if the user is active--%>
+                    <c:choose>
+                        <c:when test="${user.active}">                           
+                            <td><input type="checkbox" value="" checked></td>
+                        </c:when>
+                        <c:otherwise>
+                            <td><input type="checkbox" value=""></td>
+                        </c:otherwise>    
+                    </c:choose>
                     <td>
                       <button
                         type="submit"
