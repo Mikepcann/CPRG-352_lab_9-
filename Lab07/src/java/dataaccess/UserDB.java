@@ -106,4 +106,26 @@ public List<User> getAll() throws Exception {
        return user;
             
     }
+        
+        public void update(User user) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "UPDATE user SET email=?, active=?, first_name=?, last_name=?, password=?, role=? WHERE email=?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+                ps.setString(1, user.getEmail());
+                ps.setBoolean(2, user.isActive());
+                ps.setString(3, user.getFirst_name());
+                ps.setString(4, user.getLast_name());
+                ps.setString(5, user.getPassword());
+                ps.setInt(6, user.getRole());
+                ps.setString(7, user.getEmail());
+            ps.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+    }
 }

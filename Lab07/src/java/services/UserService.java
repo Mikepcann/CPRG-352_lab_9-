@@ -34,4 +34,9 @@ public class UserService {
         User user = userDB.get(email);
         return user;
     }
+    
+    public void update(User user) throws Exception {
+        UserDB userDB = new UserDB();
+        userDB.update(user);
+    }
 }

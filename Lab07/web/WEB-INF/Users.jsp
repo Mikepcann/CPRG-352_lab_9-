@@ -120,8 +120,8 @@ contentType="text/html" pageEncoding="UTF-8"%>
                         </form>
                     <%-- This is a form for the edit button--%>
                     <form action="Users" method="post">
-                        <input type="hidden" name="action" value="update">
-                        <input type="hidden" name="toUpdate" value="${user.email}">
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="toEdit" value="${user.email}">
                       <button
                         type="submit"
                         class="btn btn-link editButton"
@@ -173,7 +173,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 
         <div class="col-3 text-center">
           <h3>Edit User</h3>
-          <form class="border border-info p-2">
+          <form class="border border-info p-2" action="Users" method="post">
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -181,6 +181,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="Email"
                 aria-label="Recipient's email"
                 aria-describedby="basic-addon2"
+                name="updatedEmail"
                 value="${updatedEmail}"
               />
             </div>
@@ -191,6 +192,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="First Name"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
+                name="updatedFirstName"
                 value="${updatedFirstName}"
               />
             </div>
@@ -201,6 +203,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="Last Name"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
+                name="updatedLastName"
                 value="${updatedLastName}"
               />
             </div>
@@ -211,22 +214,24 @@ contentType="text/html" pageEncoding="UTF-8"%>
                 placeholder="Password"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
+                name="updatedPassword"
                 value="${updatedPassword}"
               />
             </div>
             <div class="input-group mb-3">
-              <select class="form-select" id="inputGroupSelect01" value="${updatedRole}">
-                <option>Choose Updated Role</option>
+              <select class="form-select" id="inputGroupSelect01" name="updatedRole">
+                <option>${updatedRole}</option>
                 <option value="1">System Admin</option>
                 <option value="2">Regular User</option>
                 <option value="3">Company Admin</option>
               </select>
             </div>
             <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="button">Save</button>
+              <button class="btn btn-primary" type="submit"  name="action" value="save">Save</button>
+                        </form>
+
               <button class="btn btn-primary" action="Users" method="get">Cancel</button>
             </div>
-          </form>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
-import services.UserService;
+import services.*;
 
 
 public class userServlet extends HttpServlet {
@@ -43,7 +43,7 @@ public class userServlet extends HttpServlet {
         String action = request.getParameter("action");
         
         String toDelete = request.getParameter("toDelete");
-        String toUpdate = request.getParameter("toUpdate");
+        String toUpdate = request.getParameter("toEdit");
         
         String email = request.getParameter("email");
         boolean active = true;
@@ -68,7 +68,7 @@ public class userServlet extends HttpServlet {
                 case "delete":
                     us.delete(toDelete);
                     break;
-                case "update":
+                case "edit":
                     User toUpdateUser = us.get(toUpdate);
                     request.setAttribute("updatedEmail", toUpdateUser.getEmail());
                     request.setAttribute("updatedFirstName", toUpdateUser.getFirst_name());
@@ -76,7 +76,16 @@ public class userServlet extends HttpServlet {
                     request.setAttribute("updatedPassword", toUpdateUser.getPassword());
                     request.setAttribute("updatedRole", toUpdateUser.getRole());
                     break;
- 
+                case "save":
+                    email = request.getParameter("updatedEmail");
+                    first_name = request.getParameter("updatedFirstName");
+                    last_name = request.getParameter("updatedLastName");
+                    password = request.getParameter("updatedPassword");
+                    role = Integer.parseInt(request.getParameter("updatedRole"));
+                    User updatedUser = new User(email, active, first_name, last_name, password, role);
+                    us.update(updatedUser);
+                    System.out.println("we updated the details!");
+                    break;
                 default: 
                     getServletContext().getRequestDispatcher("/WEB-INF/Users.jsp").forward(request, response);
 
