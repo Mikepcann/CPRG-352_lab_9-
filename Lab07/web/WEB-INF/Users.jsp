@@ -20,10 +20,45 @@ contentType="text/html" pageEncoding="UTF-8"%>
   </head>
 
   <body>
-    <div class="container-fluid mt-5 bg-dark text-white p-5">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">User System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Add User</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid bg-dark text-white p-5">
       <div class="row">
         <div class="col-3 text-center">
-          <h3>Add User</h3>
+            <h3 class="pb-3">Add User</h3>
           <form action="Users" method="post">
             <div class="input-group mb-3">
               <input
@@ -60,7 +95,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
             </div>
             <div class="input-group mb-3">
               <input
-                type="text"
+                type="password"
                 name="password"
                 value=""
                 class="form-control"
@@ -84,95 +119,55 @@ contentType="text/html" pageEncoding="UTF-8"%>
             </div>
           </form>
         </div>
+          
         <div class="col-6 text-center">
-          <h3>Manage Users</h3>
-          <form action="Users" method="post">
-            <table class="table table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Email</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Active</th>
-                  <th scope="col">Edit</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <%--Loop through users to display on the page --%>
-                <c:forEach items="${users}" var="user">
-                  <tr>
-                    <td>${user.email}</td>
-                    <td>${user.first_name}</td>
-                    <td>${user.last_name}</td>
-                    <td>${user.role}</td>
-                     <%--Display check mark if the user is active--%>
+          <h3 class="pb-3">Manage Users</h3>
+            <div class="row">
+              <c:forEach items="${users}" var="user">
+                <div class="col-sm-3">
+                  <div class="card text-white bg-dark border-light mb-3">
                     <c:choose>
-                        <c:when test="${user.active}">                           
-                            <td><input type="checkbox" value="" checked></td>
-                        </c:when>
-                        <c:otherwise>
-                            <td><input type="checkbox" value=""></td>
-                        </c:otherwise>    
+                      <c:when test="${user.role == 1}">
+                        <div class="pt-3">
+                          <img src="https://img.icons8.com/bubbles/100/000000/admin-settings-male.png"/>
+                        </div>
+                      </c:when>
+                      <c:when test="${user.role == 2}">
+                        <div class="pt-3">
+                          <img src="https://img.icons8.com/bubbles/100/000000/user.png" />
+                        </div>
+                      </c:when>
+                      <c:when test="${user.role == 3}">
+                        <div class="pt-3">
+                          <img src="https://img.icons8.com/bubbles/100/000000/marilyn-monro.png"/>
+                        </div>
+                      </c:when>
                     </c:choose>
-                    <td>
-                        </form>
-                    <%-- This is a form for the edit button--%>
-                    <form action="Users" method="post">
+                    <div class="card-body">
+                      <h5 class="card-title">${user.role}</h5>
+                      <p class="card-text">${user.first_name} ${user.last_name}</p>
+                      <p class="card-text">${user.email}</p>
+                      <%-- This is a form for the edit button--%>
+                      <form action="Users" method="post">
                         <input type="hidden" name="action" value="edit">
                         <input type="hidden" name="toEdit" value="${user.email}">
-                      <button
-                        type="submit"
-                        class="btn btn-link editButton"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="#ffd966"
-                          class="bi bi-pen"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                          />
-                        </svg>
-                      </button>
-                    </form>
-                    </td>
-                    <td>
-                    <%-- This is a form for the delete button--%>    
-                    <form action="Users" method="post">
-                            <input type="hidden" name="action" value="delete"> 
-                            <input type="hidden" name="toDelete" value="${user.email}">
-                      <button
-                        type="submit"
-                        class="btn btn-link deleteButton"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="#ff0000"
-                          class="bi bi-x-circle-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
-                          />
-                        </svg>
-                      </button>
-                    </form>
-                    </td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-            </table>
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                      </form>
+                      <%-- This is a form for the delete button--%>    
+                      <form action="Users" method="post">
+                        <input type="hidden" name="action" value="delete"> 
+                        <input type="hidden" name="toDelete" value="${user.email}">
+                        <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </c:forEach>
+            </div>
           </div>
                 
         <div class="col-3 text-center">
-          <h3>Edit User</h3>
+          <h3 class="pb-3">Edit User</h3>
           <form class="border border-info p-2" action="Users" method="post">
             <div class="input-group mb-3">
               <input
@@ -227,7 +222,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
               </select>
             </div>
             <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="submit"  name="action" value="save">Save</button>
+              <button class="btn btn-warning" type="submit"  name="action" value="save">Save</button>
                         </form>
 
               <button class="btn btn-primary" action="Users" method="get">Cancel</button>
@@ -236,6 +231,9 @@ contentType="text/html" pageEncoding="UTF-8"%>
       </div>
     </div>
 <%-- A comment --%>
+<a href="https://icons8.com/icon/108652/user">User icon by Icons8</a>
+<a href="https://icons8.com/icon/118624/admin-settings-male">Admin Settings Male icon by Icons8</a>
+<a href="https://icons8.com/icon/68569/marilyn-monroe">Marilyn Monroe icon by Icons8</a>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
