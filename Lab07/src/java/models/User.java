@@ -1,7 +1,9 @@
 
 package models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private String email;
     private boolean isActive;
     private String first_name;

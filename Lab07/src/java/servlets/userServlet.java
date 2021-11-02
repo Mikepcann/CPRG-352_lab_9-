@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.User;
+import models.*;
 import services.*;
 
 
@@ -21,11 +21,19 @@ public class userServlet extends HttpServlet {
             throws ServletException, IOException {
         
         UserService ns = new UserService();
+        RoleService rs = new RoleService();
         
           try {           
             List<User> users = ns.getAll();
             request.setAttribute("users", users);
             System.out.println(users);
+            
+            List<Role> roles = rs.getAll();
+            request.setAttribute("roleLabel", roles);
+          /*   System.out.println(roles.get(0).getRole_name());
+            System.out.println(roles.get(1).getRole_name());
+            System.out.println(roles.get(2).getRole_name());*/
+            
         } catch (Exception ex) {
             System.out.println("Error loading Users");
         }
@@ -55,6 +63,7 @@ public class userServlet extends HttpServlet {
 
 
         UserService us = new UserService();
+        RoleService rs = new RoleService();
         
         
         try {
@@ -99,6 +108,8 @@ public class userServlet extends HttpServlet {
             List<User> users = us.getAll();
             request.setAttribute("users", users);
             System.out.println(users);
+            List<Role> roles = rs.getAll();
+            request.setAttribute("roleLabel", roles);
         } catch (Exception ex) {
             System.out.println("Error loading Users");
         }

@@ -20,7 +20,7 @@ public class RoleDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM role WHERE role_id=?";
+        String sql = "SELECT * FROM role";
         
                 try {
             ps = con.prepareStatement(sql);
