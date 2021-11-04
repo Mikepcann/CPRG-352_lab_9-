@@ -23,13 +23,17 @@ public class userServlet extends HttpServlet {
         UserService ns = new UserService();
         RoleService rs = new RoleService();
         
-          try {           
+          try {      
+              
+              List<Role> roles = rs.getAll();
+            request.setAttribute("roleLabel", roles);
+            
+            
             List<User> users = ns.getAll();
             request.setAttribute("users", users);
             System.out.println(users);
             
-            List<Role> roles = rs.getAll();
-            request.setAttribute("roleLabel", roles);
+            
           /*   System.out.println(roles.get(0).getRole_name());
             System.out.println(roles.get(1).getRole_name());
             System.out.println(roles.get(2).getRole_name());*/
@@ -80,8 +84,8 @@ public class userServlet extends HttpServlet {
                 case "edit":
                     User toUpdateUser = us.get(toUpdate);
                     request.setAttribute("updatedEmail", toUpdateUser.getEmail());
-                    request.setAttribute("updatedFirstName", toUpdateUser.getFirst_name());
-                    request.setAttribute("updatedLastName", toUpdateUser.getLast_name());
+                    request.setAttribute("updatedFirstName", toUpdateUser.getFirstName());
+                    request.setAttribute("updatedLastName", toUpdateUser.getLastName());
                     request.setAttribute("updatedPassword", toUpdateUser.getPassword());
                     request.setAttribute("updatedRole", toUpdateUser.getRole());
                     break;
