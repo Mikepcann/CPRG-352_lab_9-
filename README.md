@@ -1,5 +1,5 @@
 
-# lab7-servleteers
+# lab 9
 
   Anyone cloning this repo will need to configure their *context.xml* file.
   Because everyones machines are different they will need to configure
