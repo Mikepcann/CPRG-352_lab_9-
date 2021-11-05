@@ -35,13 +35,13 @@ public class UserDB {
 
     }
 
-    public void delete(User user) throws Exception {
+    public void delete(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.remove(em.merge(user));
+            em.remove(em.merge(get(email)));
             trans.commit();
         } catch (Exception ex) {
 
@@ -54,9 +54,10 @@ public class UserDB {
 
     public User get(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-
+            System.out.println("Made it to the get user!");
         try {
-            User user = em.createNamedQuery("User.findByEmail", User.class).getSingleResult();
+            User user = em.createNamedQuery("User.findByEmail",User.class).setParameter("email", email).getSingleResult();
+            System.out.print(user + "THIS IS WHAT IS RETURNED");
             return user;
         } finally {
             em.close();

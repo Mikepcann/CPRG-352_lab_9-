@@ -32,11 +32,7 @@ public class userServlet extends HttpServlet {
             List<User> users = ns.getAll();
             request.setAttribute("users", users);
             System.out.println(users);
-            
-            
-          /*   System.out.println(roles.get(0).getRole_name());
-            System.out.println(roles.get(1).getRole_name());
-            System.out.println(roles.get(2).getRole_name());*/
+
             
         } catch (Exception ex) {
             System.out.println("Error loading Users");
@@ -83,11 +79,12 @@ public class userServlet extends HttpServlet {
                     break;
                 case "edit":
                     User toUpdateUser = us.get(toUpdate);
+                    System.out.println(toUpdate + "*************************************** ");
                     request.setAttribute("updatedEmail", toUpdateUser.getEmail());
                     request.setAttribute("updatedFirstName", toUpdateUser.getFirstName());
                     request.setAttribute("updatedLastName", toUpdateUser.getLastName());
                     request.setAttribute("updatedPassword", toUpdateUser.getPassword());
-                    request.setAttribute("updatedRole", toUpdateUser.getRole());
+                    request.setAttribute("updatedRole", toUpdateUser.getRole().getRoleId());
                     break;
                 case "save":
                     email = request.getParameter("updatedEmail");
@@ -119,7 +116,7 @@ public class userServlet extends HttpServlet {
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/Users.jsp").forward(request, response);
-
+        return;
     }
 
 }

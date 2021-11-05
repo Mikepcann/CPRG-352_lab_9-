@@ -19,7 +19,6 @@ public class RoleService {
         System.out.println("In the Role Service");
         RoleDB roleDB = new RoleDB();
         List<Role> roles = roleDB.getAll();
-        System.out.println(roles.size()+ "Size of the roles");
         return roles;
     }
 }
